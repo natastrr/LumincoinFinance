@@ -1,0 +1,32 @@
+<h1>Главная</h1>
+<div class="sort-by-period">
+    <input type="radio" class="btn-check" id="today-button" autocomplete="off" checked>
+    <label class="btn btn-outline-secondary" for="today-button">Сегодня</label>
+
+    <input type="radio" class="btn-check" id="week-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="week-button">Неделя</label>
+
+    <input type="radio" class="btn-check" id="month-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="month-button">Месяц</label>
+
+    <input type="radio" class="btn-check" id="year-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="year-button">Год</label>
+
+    <input type="radio" class="btn-check" id="all-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="all-button">Все</label>
+
+    <input type="radio" class="btn-check" id="interval-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="interval-button">Интервал</label>
+
+    <div class="select-dates">
+        <label for="date-from" class="form-label">с</label>
+        <input type="text" id="date-from" class="form-control" placeholder="Дата" readonly>
+        <label for="date-to" class="form-label">по</label>
+        <input type="text" id="date-to" class="form-control" placeholder="Дата" readonly>
+    </div>
+</div>
+<div class="main-charts">
+    <canvas id="income"></canvas>
+    <div class="line-between-charts"></div>
+    <canvas id="expense"></canvas>
+</div>

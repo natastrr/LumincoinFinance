@@ -1,0 +1,81 @@
+.sort-by-period {
+    margin: 40px 0;
+}
+.flatpickr-input {
+    border: 0;
+    background-color: transparent;
+    padding: 9px 12px;
+    margin-right: 15px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    height: 37px;
+    width: 63px;
+    outline: none;
+}
+.flatpickr-input::placeholder {
+    font-size: 16px;
+    line-height: 1;
+    color: #6C757D;
+    display: block;
+    border-bottom: 1px solid #6C757D;
+}
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table {
+    margin: 0;
+    border-top: 1px solid #DEE2E6;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table th {
+    color: #052C65;
+    font-weight: bold;
+}
+
+.sum, .date {
+    white-space: nowrap;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icons button {
+    text-decoration: none;
+    padding: 0;
+    width: unset;
+    height: unset;
+    border: 0;
+    background-color: transparent;
+}
+.icons button i {
+    color: black;
+    transition: .2s;
+}
+
+.icons button i:hover {
+    color: #0D6EFD;
+}
+
+@media screen and (max-width: 425px) {
+    .income-and-expense-buttons {
+        flex-direction: column;
+    }
+    .income-and-expense-buttons > * {
+        width: 100%;
+    }
+}

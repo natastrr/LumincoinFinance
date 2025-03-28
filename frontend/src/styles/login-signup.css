@@ -1,0 +1,51 @@
+.Logo {
+    margin-bottom: 60px;
+    max-width: 171px;
+}
+
+.Logo img {
+    max-width: 100%;
+}
+
+form {
+    width: 397px;
+}
+
+h1 {
+    color: #052C65;
+}
+
+i {
+    color: #6C757D;
+}
+
+span.input-group-text.bg-body-secondary {
+    width: 38px;
+    height: 38px;
+}
+
+.form-check label {
+    font-size: 12px;
+}
+
+#remember-me {
+    top: 2px;
+}
+
+.signup-block, .login-block {
+    font-size: 12px;
+}
+
+.input-error {
+    font-size: 12px;
+    display: none;
+}
+
+@media screen and (max-width: 430px) {
+    form {
+        width: 95%;
+    }
+    div.signup-block, div.login-block {
+        text-align: center;
+    }
+}

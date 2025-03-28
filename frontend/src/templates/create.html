@@ -1,0 +1,15 @@
+<h1 id="content-title"></h1>
+<select id="type-input" class="form-control" disabled>
+    <option value="income">Доход</option>
+    <option value="expense">Расход</option>
+</select>
+<select id="category-input" class="form-control">
+    <option disabled selected value="">Категория...</option>
+</select>
+<input type="number" class="form-control" placeholder="Сумма в $..." id="sum-input">
+<input type="text" id="date-input" class="form-control create-date" placeholder="Дата..." readonly>
+<textarea class="form-control" placeholder="Комментарий..." id="comment-input" rows="1"></textarea>
+<div class="buttons">
+    <button class="btn btn-success" id="create-button"></button>
+    <button class="btn btn-danger" id="cancel-button">Отмена</button>
+</div>

@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+}
+
+/* Sort-table: */
+.sort-by-period {
+    display: flex;
+    align-items: center;
+}
+.sort-by-period label {
+    margin-right: 20px;
+    width: 100px;
+    height: 37px;
+}
+.select-dates label {
+    margin: 0 9px 0 0;
+    width: unset;
+    height: unset;
+    font-size: 16px;
+    color: black;
+}
+/**/
+
+/* Main: */
+.main {
+    padding: 100px 60px;
+    width: 100%;
+    overflow: hidden;
+}
+.main h1 {
+    font-size: 40px;
+    line-height: 47px;
+    font-weight: 500;
+    color: #052C65;
+    margin-bottom: 40px;
+}
+/**/
+
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 220px;
+    border-right: 1px solid #d9d9d9;
+    font-size: 14px;
+    color: #052c65;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 40px 0;
+}
+.logo {
+    width: 100%;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 20px;
+}
+.logo img {
+    max-width: 98px;
+}
+.nav {
+    padding: 60px 20px;
+}
+.nav-link {
+    padding: 12px 16px;
+    white-space: nowrap;
+}
+.nav-link i {
+    margin-right: 10px;
+    color: #052c65;
+}
+.nav-link.link-dark {
+    color: #052c65 !important;
+}
+.nav-link.active i {
+    color: white;
+}
+button.nav-link {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+button.nav-link.active {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+button.nav-link.active svg {
+    transform: rotate(90deg);
+    transition: .3s;
+}
+button.nav-link.active svg path {
+    fill: white;
+}
+button.nav-link.active ~ .show-categories {
+    display: block;
+}
+.categories:has(button.nav-link.active) {
+    border-radius: 7px;
+    border: 1px solid #0D6EFD;
+    box-sizing: border-box;
+}
+.show-categories {
+    display: none;
+    list-style: none;
+    padding: 0;
+}
+.show-categories li a {
+    text-decoration: none;
+    color: #0D6EFD;
+    display: block;
+    padding: 12px 16px;
+}
+.show-categories li a:hover {
+    color: white;
+    background-color: #0D6EFD;
+}
+.show-categories li:last-child a {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.show-categories li a.show-categories-active {
+    background-color: #0D6EFD;
+    color: white;
+}
+.balance {
+    font-weight: 500;
+    padding: 20px;
+    border-bottom: 1px solid #d9d9d9;
+    cursor: pointer;
+}
+.balance span {
+    margin-left: 10px;
+}
+.user {
+    padding: 20px 20px 0 20px;
+}
+.user-image {
+    margin-right: 16px;
+    width: 36px;
+    height: 36px;
+    background-color: #d9d9d9;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: .5s;
+}
+.user-image i {
+    color: #6c757d;
+    font-size: 16px;
+    transition: inherit;
+}
+.user-image:hover {
+    background-color: #0D6EFD;
+}
+.user-image:hover i {
+    color: white;
+}
+.user-name {
+    line-height: 1.5;
+}
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #052C65;
+}
+.logout-button i {
+    color: #052C65;
+}
+.logout-button:hover, .logout-button:hover i {
+    color: #0D6EFD;
+}
+
+/* Burger-menu Button */
+.burger-menu {
+    display: none;
+    position: absolute;
+    padding: 0;
+    top: 15px;
+    left: 10px;
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 26px;
+    cursor: pointer;
+    transform: scale(.8);
+}
+.burger-menu::before, .burger-menu::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #052c65;
+}
+.burger-menu::before {
+    top: 0;
+    box-shadow: 0 11px 0 #052c65;
+    transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+.burger-menu::after {
+    bottom: 0;
+    transition: bottom .3s .15s, transform .3s;
+}
+.burger-menu.active::before {
+    top: 11px;
+    transform: rotate(45deg);
+    box-shadow: none;
+    transition: box-shadow .15s, top .3s, transform .3s .15s;
+}
+.burger-menu.active::after {
+    bottom: 11px;
+    transform: rotate(-45deg);
+    transition: bottom .3s, transform .3s .15s;
+}
+/**/
+
+/* Button Group */
+.buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.buttons > * {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 11px 16px;
+    margin: 0;
+    display: block;
+    text-decoration: none;
+}
+/**/
+
+/* Styles for Delete-Popup: */
+.modal-dialog {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.modal-content {
+    width: 530px;
+    flex-shrink: 0;
+}
+.modal-body {
+    padding: 40px;
+}
+.delete-popup-text {
+    font-size: 20px;
+    line-height: 23px;
+    color: #290661;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+    white-space: nowrap;
+}
+.delete-popup-text span {
+    display: block;
+}
+.modal-body .buttons {
+    justify-content: center;
+}
+.modal-body input {
+    display: block;
+    margin-bottom: 20px;
+}
+.modal-body button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+/**/
+
+/* Common adaptive: */
+@media screen and (max-width: 1300px) {
+    .sidebar {
+        padding: 20px 0;
+    }
+    .sort-by-period {
+        flex-wrap: wrap;
+        margin-bottom: 70px;
+        row-gap: 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .sidebar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border: 0;
+    }
+    .nav {
+        padding: 20px;
+    }
+    .burger-menu {
+        display: block;
+        z-index: 1;
+    }
+    .burger-menu.active ~ .sidebar {
+        display: flex;
+    }
+    .main {
+        padding: 50px 20px;
+    }
+    .main h1 {
+        text-align: center;
+    }
+    .sort-by-period {
+        justify-content: center;
+        gap: 15px;
+    }
+    .sort-by-period label {
+        margin: 0;
+    }
+    .modal-content {
+        width: 95%;
+    }
+    .modal-body {
+        padding: 40px 20px;
+    }
+    .delete-popup-text {
+        font-size: 16px;
+        white-space: unset;
+    }
+/**/
+
+}
+@media screen and (max-width: 425px) {
+    .main {
+        padding: 50px 20px;
+    }
+    .main h1 {
+        font-size: 35px;
+    }
+    .select-dates input {
+        margin: 0;
+    }
+    .modal-body .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+/**/

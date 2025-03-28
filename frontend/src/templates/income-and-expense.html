@@ -1,0 +1,63 @@
+<h1>Доходы и расходы</h1>
+<div class="buttons income-and-expense-buttons">
+    <button class="btn btn-success" id="create-income">Создать доход</button>
+    <button class="btn btn-danger" id="create-expense">Создать расход</button>
+</div>
+<div class="sort-by-period">
+    <input type="radio" class="btn-check" id="today-button" autocomplete="off" checked>
+    <label class="btn btn-outline-secondary" for="today-button">Сегодня</label>
+
+    <input type="radio" class="btn-check" id="week-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="week-button">Неделя</label>
+
+    <input type="radio" class="btn-check" id="month-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="month-button">Месяц</label>
+
+    <input type="radio" class="btn-check" id="year-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="year-button">Год</label>
+
+    <input type="radio" class="btn-check" id="all-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="all-button">Все</label>
+
+    <input type="radio" class="btn-check" id="interval-button" autocomplete="off">
+    <label class="btn btn-outline-secondary" for="interval-button">Интервал</label>
+
+    <div class="select-dates">
+        <label for="date-from" class="form-label">с</label>
+        <input type="text" id="date-from" class="form-control" placeholder="Дата" readonly>
+        <label for="date-to" class="form-label">по</label>
+        <input type="text" id="date-to" class="form-control" placeholder="Дата" readonly>
+    </div>
+</div>
+
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><b>№ операции</b></th>
+            <th>Тип</th>
+            <th>Категория</th>
+            <th>Сумма</th>
+            <th>Дата</th>
+            <th>Комментарий</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="table"></tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="delete-popup" data-bs-backdrop="static" data-bs-keyboard="false"
+     aria-labelledby="delete-popup" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="delete-popup-text">Вы действительно хотите удалить операцию?</div>
+                <div class="buttons">
+                    <button type="button" class="btn btn-success" id="confirm-delete">Да, удалить</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Не удалять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

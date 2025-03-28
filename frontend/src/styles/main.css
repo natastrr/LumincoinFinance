@@ -1,0 +1,43 @@
+.sort-by-period {
+    margin-bottom: 140px;
+}
+
+.main-charts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+}
+
+canvas {
+    max-height: 437px;
+    max-width: 467px;
+    flex-shrink: 0;
+}
+
+.line-between-charts {
+    width: 1px;
+    height: 450px;
+    background-color: #D9D9D9;
+    position: relative;
+    top: 57px;
+}
+
+@media screen and (max-width: 1300px) {
+    .main-charts {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 50px;
+    }
+    .line-between-charts {
+        display: none;
+    }
+}
+@media screen and (max-width: 767px) {
+    .main-charts {
+        justify-content: center;
+    }
+    canvas {
+        max-width: 100%;
+    }
+}

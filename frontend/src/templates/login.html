@@ -1,0 +1,26 @@
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="Logo">
+        <img src="/images/logo.svg" alt="Лого Lumincoin Finance">
+    </div>
+    <h1 class="text-center mb-3">Вход</h1>
+    <form id="login-form" novalidate>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text bg-body-secondary p-0 d-flex justify-content-center align-items-center"><i class="fa-regular fa-envelope-open"></i></span>
+            <input type="email" class="form-control" placeholder="Электронная почта" id="email" required>
+        </div>
+        <div class="input-error text-danger" id="email-error">Необходимо ввести корректный адрес электронной почты!</div>
+
+        <div class="input-group flex-nowrap mt-2">
+            <span class="input-group-text bg-body-secondary p-0 d-flex justify-content-center align-items-center"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" class="form-control" placeholder="Пароль" id="password" required>
+        </div>
+        <div class="input-error text-danger" id="password-error">Необходимо заполнить пароль!</div>
+
+        <div class="form-check mt-2 mb-3">
+            <input class="form-check-input position-relative" type="checkbox" id="remember-me">
+            <label class="form-check-label" for="remember-me">Запомнить меня</label>
+        </div>
+        <button type="button" class="btn btn-primary w-100" id="login-button">Войти</button>
+        <div class="signup-block mt-2">Ещё нет аккаунта? <a href="/sign-up">Пройдите регистрацию</a></div>
+    </form>
+</div>

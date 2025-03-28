@@ -1,0 +1,60 @@
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 352px;
+    height: 121px;
+    position: static;
+    text-decoration: none;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 28px;
+    line-height: 1;
+    color: #290661;
+    margin-bottom: 12px;
+}
+
+.edit-button, .delete-button {
+    height: 38px;
+    padding: 11px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
+}
+
+.edit-button {
+    width: 134px;
+}
+
+.delete-button {
+    width: 88px;
+}
+
+.add .card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #CED4DA;
+    line-height: 1;
+}
+
+@media screen and (max-width: 767px) {
+    .cards {
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 425px) {
+    .card {
+        width: 100%;
+    }
+}
