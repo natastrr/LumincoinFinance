@@ -108,7 +108,7 @@ export class CreateOrEdit {
             const response = await CustomHttp.request(config.host + '/categories/' + category);
 
             if (!response || !response.length) {
-                throw new Error(`Отсутствуют категории ${this.incomeOrExpense === 'income' ? 'доходов' : 'расходов'}! Создайте категорию!`);
+                throw new Error(`Отсутствуют категории ${this.incomeOrExpense === 'income' ? 'доходов' : 'расходов'}!`);
             }
             if (!response.every(item => item.id && item.title)) {
                 throw new Error('Некорректные данные!');
@@ -120,10 +120,7 @@ export class CreateOrEdit {
                 this.categoryInput.appendChild(optionEl);
             });
         } catch (error) {
-            let messageText = error.message, locationPathname = '/income&expense';
-            error.message.includes('Отсутствуют категории') ? locationPathname = '/create-' + this.incomeOrExpense : messageText = 'Возникла ошибка в получении данных!';
-            alert(messageText);
-            location.pathname = locationPathname;
+            location.pathname = '/income&expense';
         }
     }
 }

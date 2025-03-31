@@ -70,10 +70,10 @@ export class IncomeOrExpense {
                             for (const operationId of operationsIdForDelete) {
                                 await CustomHttp.request(config.host + '/operations/' + operationId, 'DELETE');
                             }
-                            await CustomHttp.request(config.host + '/categories' + location.pathname + '/' + button.closest('.card-body').id, 'DELETE');
-                            document.querySelector('[data-bs-dismiss="modal"].btn-danger')?.click();
-                            this.init();
                         }
+                        await CustomHttp.request(config.host + '/categories' + location.pathname + '/' + button.closest('.card-body').id, 'DELETE');
+                        document.querySelector('[data-bs-dismiss="modal"].btn-danger')?.click();
+                        this.init();
                     } catch(error) {
                         alert('Не удалось удалить категорию!');
                     }
