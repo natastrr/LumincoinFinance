@@ -8,12 +8,13 @@ export class IncomeAndExpense {
     constructor() {
         this.sortButtons = [...document.querySelectorAll('.sort-by-period > input')];
         this.tableEl = document.getElementById('table');
+        this.createIncomeButton = document.getElementById('create-income');
+        this.createExpenseButton = document.getElementById('create-expense');
         this.init();
     }
 
     init() {
         this.addEventListeners();
-
         if (this.sortButtons) {
             Common.sortButtonsInteraction(this.sortButtons, async (date1, date2) => {
                 this.tableEl.innerHTML = '';
@@ -27,15 +28,15 @@ export class IncomeAndExpense {
                 this.sortButtons[0].click();
             }
         }
-
-
+        this.getCategories('income').then(response => this.createIncomeButton.disabled = response);
+        this.getCategories('expense').then(response => this.createExpenseButton.disabled = response);
     }
     addEventListeners() {
-        document.getElementById('create-income').onclick = () => {
+        this.createIncomeButton.onclick = () => {
             sessionStorage.setItem('createIncomeOrExpense', 'income');
             location.pathname = '/create-income-or-expense';
         }
-        document.getElementById('create-expense').onclick = () => {
+        this.createExpenseButton.onclick = () => {
             sessionStorage.setItem('createIncomeOrExpense', 'expense');
             location.pathname = '/create-income-or-expense';
         }
@@ -99,7 +100,7 @@ export class IncomeAndExpense {
                                     throw new Error();
                                 }
                                 document.querySelector('[data-bs-dismiss="modal"].btn-danger')?.click();
-                                button.closest('tr').remove();
+                                location.pathname = '/income&expense';
                             } catch(error) {
                                 alert('Не удалось удалить операцию!');
                             }
@@ -107,6 +108,14 @@ export class IncomeAndExpense {
                     }
                 }
             });
+        }
+    }
+    async getCategories(category) {
+        try {
+            const response = await CustomHttp.request(config.host + '/categories/' + category);
+            return !(response && response.length && response.every(item => item.id && item.title));
+        } catch (error) {
+            console.log(error.message);
         }
     }
 }

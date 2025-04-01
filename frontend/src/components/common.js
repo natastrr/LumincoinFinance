@@ -119,7 +119,7 @@ export class Common {
                     } else {
                         try {
                             const result = await CustomHttp.request(config.host + '/balance', 'PUT', {newBalance: inputBalanceValue});
-                            if (!result || result?.error || !result?.balance) {
+                            if (!result || result?.error) {
                                 throw new Error(result.message);
                             }
                             this.balanceEl.innerText = result.balance + '$';
@@ -221,8 +221,6 @@ export class Common {
             const response = await CustomHttp.request(config.host + '/operations' + '?period=interval&dateFrom=' + date1 + '&dateTo=' + date2);
             if (response && !!response.length) {
                 return response;
-            } else {
-                alert('Данные за этот период отсутствуют!');
             }
         } catch (error) {
             alert('Ошибка при получении данных!');

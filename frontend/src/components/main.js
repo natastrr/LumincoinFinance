@@ -11,6 +11,8 @@ export class Main {
     constructor() {
         this.sortButtons = [...document.querySelectorAll('.sort-by-period > input')];
         this.chartInstances = {};
+        this.incomeChartEl = document.getElementById('income');
+        this.expenseChartEl = document.getElementById('expense');
 
         if (this.sortButtons) {
             this.sortButtonsInteraction();
@@ -33,12 +35,8 @@ export class Main {
                         expenseData[item.category] = (expenseData[item.category] || 0) + item.amount;
                     }
                 });
-                if (Object.keys(incomeData).length > 0) {
-                    this.createChart('income', 'Доходы', incomeData);
-                }
-                if (Object.keys(expenseData).length > 0) {
-                    this.createChart('expense', 'Расходы', expenseData);
-                }
+                Object.keys(incomeData).length > 0 ? this.createChart('income', 'Доходы', incomeData) : this.incomeChartEl.style.display = 'none';
+                Object.keys(expenseData).length > 0 ? this.createChart('expense', 'Расходы', expenseData) : this.expenseChartEl.style.display = 'none';
             }
         });
     }
@@ -72,6 +70,7 @@ export class Main {
                             font: {
                                 size: 12,
                             },
+                            padding: 40,
                         },
                         title: {
                             color: '#290661',
@@ -80,9 +79,6 @@ export class Main {
                                 size: '28px',
                             },
                             text: text,
-                            padding: {
-                                bottom: 10
-                            }
                         },
                     },
                 },
