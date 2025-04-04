@@ -4,15 +4,13 @@ import "../styles/common-styles.css";
 import "../styles/main.css";
 import {Chart, ArcElement, Tooltip, Legend, PieController} from "chart.js";
 import {Common} from "./common";
-
+import { handleHover, handleLeave, legendMarginPlugin } from '../utils/chart-plugins.js';
 Chart.register(ArcElement, Tooltip, Legend, PieController);
 
 export class Main {
     constructor() {
         this.sortButtons = [...document.querySelectorAll('.sort-by-period > input')];
         this.chartInstances = {};
-        this.incomeChartEl = document.getElementById('income');
-        this.expenseChartEl = document.getElementById('expense');
 
         if (this.sortButtons) {
             this.sortButtonsInteraction();
@@ -35,8 +33,11 @@ export class Main {
                         expenseData[item.category] = (expenseData[item.category] || 0) + item.amount;
                     }
                 });
-                Object.keys(incomeData).length > 0 ? this.createChart('income', 'Доходы', incomeData) : this.incomeChartEl.style.display = 'none';
-                Object.keys(expenseData).length > 0 ? this.createChart('expense', 'Расходы', expenseData) : this.expenseChartEl.style.display = 'none';
+                Object.keys(incomeData).length > 0 ? this.createChart('income', 'Доходы', incomeData) : this.destroyChartIfExists('income');
+                Object.keys(expenseData).length > 0 ? this.createChart('expense', 'Расходы', expenseData) : this.destroyChartIfExists('expense');
+            } else {
+                this.destroyChartIfExists('income');
+                this.destroyChartIfExists('expense');
             }
         });
     }
@@ -46,6 +47,7 @@ export class Main {
         }
         this.chartInstances[id] = new Chart(document.getElementById(id), {
             type: 'pie',
+            plugins: [legendMarginPlugin],
             data: {
                 labels: Object.keys(data),
                 datasets: [{
@@ -59,6 +61,8 @@ export class Main {
                 maintainAspectRatio: true,
                 plugins: {
                     legend: {
+                        onHover: handleHover,
+                        onLeave: handleLeave,
                         fullSize: true,
                         display: true,
                         position: 'top',
@@ -70,7 +74,6 @@ export class Main {
                             font: {
                                 size: 12,
                             },
-                            padding: 40,
                         },
                         title: {
                             color: '#290661',
@@ -79,6 +82,9 @@ export class Main {
                                 size: '28px',
                             },
                             text: text,
+                            padding: {
+                                bottom: 20,
+                            },
                         },
                     },
                 },
@@ -105,6 +111,12 @@ export class Main {
                 }
                 return color;
             }
+        }
+    }
+    destroyChartIfExists(chartId) {
+        if (this.chartInstances[chartId]) {
+            this.chartInstances[chartId].destroy();
+            delete this.chartInstances[chartId];
         }
     }
 }
