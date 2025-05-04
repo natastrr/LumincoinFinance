@@ -3,12 +3,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/app.ts',
     mode: 'development',
+    devtool: 'inline-source-map',
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: 'fonts/[name][ext]'
+        assetModuleFilename: 'fonts/[name][ext]',
+        clean: true
     },
     devServer: {
         static: {
@@ -27,8 +29,16 @@ module.exports = {
             {
                 test: /\.(woff2?|ttf|otf|eot)$/,
                 type: 'asset/resource',
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             }
         ],
+    },
+    resolve : {
+        extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
         new HtmlWebpackPlugin({template: './index.html'}),

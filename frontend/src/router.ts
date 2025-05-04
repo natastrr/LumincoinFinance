@@ -6,8 +6,13 @@ import {Action} from "./components/action";
 import {IncomeAndExpense} from "./components/income-and-expense";
 import {CreateOrEdit} from "./components/create-or-edit";
 import {Auth} from "./utils/auth";
+import {RouteType} from "./types";
 
 export class Router {
+    readonly titlePageElement: HTMLElement | null;
+    readonly contentPageElement: HTMLElement | null;
+    private routes: RouteType[];
+
     constructor() {
         this.titlePageElement = document.getElementById('title');
         this.contentPageElement = document.getElementById('content');
@@ -20,7 +25,7 @@ export class Router {
                 filePathTemplate: '/templates/main.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new Main();
                 }
@@ -29,14 +34,12 @@ export class Router {
                 route: '/404',
                 title: 'Страница не найдена',
                 filePathTemplate: '/templates/404.html',
-                useSidebar: false,
             },
             {
                 route: '/login',
                 title: 'Вход',
                 filePathTemplate: '/templates/login.html',
-                useSidebar: false,
-                load: () => {
+                load: (): void => {
                     new LoginAndSignup();
                 }
             },
@@ -44,8 +47,7 @@ export class Router {
                 route: '/sign-up',
                 title: 'Регистрация',
                 filePathTemplate: '/templates/sign-up.html',
-                useSidebar: false,
-                load: () => {
+                load: (): void => {
                     new LoginAndSignup();
                 }
             },
@@ -55,7 +57,7 @@ export class Router {
                 filePathTemplate: '/templates/income-or-expense.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new IncomeOrExpense();
                 }
@@ -66,7 +68,7 @@ export class Router {
                 filePathTemplate: '/templates/income-or-expense.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new IncomeOrExpense();
                 }
@@ -77,7 +79,7 @@ export class Router {
                 filePathTemplate: '/templates/income-and-expense.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new IncomeAndExpense();
                 }
@@ -88,7 +90,7 @@ export class Router {
                 filePathTemplate: '/templates/action.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new Action();
                 }
@@ -99,7 +101,7 @@ export class Router {
                 filePathTemplate: '/templates/action.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new Action();
                 }
@@ -110,7 +112,7 @@ export class Router {
                 filePathTemplate: '/templates/action.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new Action();
                 }
@@ -121,7 +123,7 @@ export class Router {
                 filePathTemplate: '/templates/action.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new Action();
                 }
@@ -132,7 +134,7 @@ export class Router {
                 filePathTemplate: '/templates/create.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new CreateOrEdit();
                 }
@@ -143,7 +145,7 @@ export class Router {
                 filePathTemplate: '/templates/create.html',
                 useSidebar: '/templates/sidebar.html',
                 authRequired: true,
-                load: () => {
+                load: (): void => {
                     new Common();
                     new CreateOrEdit();
                 }
@@ -151,40 +153,37 @@ export class Router {
         ];
     }
 
-    initEvents() {
+    private initEvents(): void {
         window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
         window.addEventListener('popstate', this.activateRoute.bind(this));
     }
-    async activateRoute() {
-        const urlRoute = window.location.pathname;
-        const newRoute = this.routes.find(item => item.route === urlRoute);
+
+    private async activateRoute(): Promise<void> {
+        const urlRoute: string = window.location.pathname;
+        const newRoute: RouteType | undefined = this.routes.find(item => item.route === urlRoute);
         if (!newRoute) {
-            window.location = '/404';
+            window.location.pathname = '/404';
             return;
         }
-        if (newRoute.authRequired) {
-            const isLoggedIn = await this.checkAuth();
-            if (!isLoggedIn) return;
+        if (newRoute.authRequired && !localStorage.getItem(Auth.accessTokenKey)) {
+            await Auth.processUnauthorizedResponse();
+            return;
         }
-        if (newRoute.title) {
+        if (newRoute.title && this.titlePageElement) {
             this.titlePageElement.innerText = newRoute.title + ' | Lumincoin Finance';
         }
         if (newRoute.filePathTemplate) {
-            let contentBlock = this.contentPageElement;
-            if (newRoute.useSidebar) {
+            let contentBlock: HTMLElement | null = this.contentPageElement;
+            if (newRoute.useSidebar && this.contentPageElement) {
                 this.contentPageElement.innerHTML = await fetch(newRoute.useSidebar).then(response => response.text());
                 contentBlock = document.getElementById('main');
             }
-            contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
+            if (contentBlock) {
+                contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
+            }
         }
         if (newRoute.load && typeof newRoute.load === 'function') {
             newRoute.load();
         }
-    }
-
-    async checkAuth() {
-        const accessToken = localStorage.getItem(Auth.accessTokenKey);
-        if (accessToken) return true;
-        return await Auth.processUnauthorizedResponse();
     }
 }

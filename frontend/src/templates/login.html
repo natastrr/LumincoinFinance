@@ -6,13 +6,13 @@
     <form id="login-form" novalidate>
         <div class="input-group flex-nowrap">
             <span class="input-group-text bg-body-secondary p-0 d-flex justify-content-center align-items-center"><i class="fa-regular fa-envelope-open"></i></span>
-            <input type="email" class="form-control" placeholder="Электронная почта" id="email" required>
+            <input type="email" class="form-control" placeholder="Электронная почта" id="email" required autocomplete="username">
         </div>
         <div class="input-error text-danger" id="email-error">Необходимо ввести корректный адрес электронной почты!</div>
 
         <div class="input-group flex-nowrap mt-2">
             <span class="input-group-text bg-body-secondary p-0 d-flex justify-content-center align-items-center"><i class="fa-solid fa-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Пароль" id="password" required>
+            <input type="password" class="form-control" placeholder="Пароль" id="password" required autocomplete="current-password">
         </div>
         <div class="input-error text-danger" id="password-error">Необходимо заполнить пароль!</div>
 
